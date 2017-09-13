@@ -1,0 +1,4 @@
+max all, sqrt : 184.388  , 13.579
+borders of categories : -0.8575   -0.2275   0.1125   0.3425 , END = 0.7225
+S**2/S+B in each category : 7.17517   41.1416   61.5047  65.59    , max = 175.412
+sqrt(S**2/S+B) in each category : 2.67865   6.41417   7.84249   8.09877    , max = 13.2443

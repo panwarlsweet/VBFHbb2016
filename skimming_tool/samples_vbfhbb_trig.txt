@@ -1,0 +1,12 @@
+#name=VBFHbb   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/VBFHToBB_M-125_13TeV_powheg_pythia8_weightfix/
+
+#name=JetHT    site=root://stormgf1.pi.infn.it:1094/	dir=/store/user/arizzi/VHBBHeppyV25b/JetHT/
+
+name=QCD_HT100to200   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/QCD_HT100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/         
+name=QCD_HT200to300   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/QCD_HT200to300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/    
+name=QCD_HT300to500   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/QCD_HT300to500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/   
+name=QCD_HT500to700   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/  
+name=QCD_HT700to1000   site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/ 
+name=QCD_HT1000to1500   site=root://stormgf1.pi.infn.it:1094/  dir=/store/user/tboccali/Ntuples_v25/QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/ 
+name=QCD_HT1500to2000  site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/ 
+name=QCD_HT2000toInf   site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/    

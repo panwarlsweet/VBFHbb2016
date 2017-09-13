@@ -1,0 +1,7 @@
+{
+"qcd_norm"                   : 1.5,
+"wjets_norm"                 : 1.2,
+"top_norm"                   : 1.2,
+"CMS_vbfbb_scale_mbb_13TeV" : [1.0,0.015],
+"CMS_vbfbb_res_mbb_13TeV"   : [1.0,0.015]
+}

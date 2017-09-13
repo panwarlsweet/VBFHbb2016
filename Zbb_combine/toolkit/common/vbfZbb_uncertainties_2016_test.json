@@ -1,0 +1,8 @@
+{
+"lumi_13TeV"                       : [[1.027]],
+"qcd_norm"                   : 1.5,
+"wjets_norm"                 : 1.3,
+"top_norm"                   : 1.3,
+"CMS_vbfbb_scale_mbb_13TeV" : [1.0,0.02],
+"CMS_vbfbb_res_mbb_13TeV"   : [1.0,0.02],
+}

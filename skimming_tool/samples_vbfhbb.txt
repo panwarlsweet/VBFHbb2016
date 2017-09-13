@@ -1,0 +1,67 @@
+#name=VBFHbb_herwig    site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/VBFHToBB_M-125_13TeV_powheg_herwigpp_weightfix/
+#name=VBFHbb_CUEDown    site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/VBFHToBB_M-125_13TeV_powheg_pythia8_weightfix_CUETP8M1Down/
+#name=VBFHbb_CUEUp    site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/VBFHToBB_M-125_13TeV_powheg_pythia8_weightfix_CUETP8M1Up/
+# name=VBFHbb_M130    site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/VBFHToBB_M-130_13TeV_powheg_pythia8/
+#name=VBFHbb   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/VBFHToBB_M-125_13TeV_powheg_pythia8_weightfix/
+#name=VBFHbb_amc    site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/VBFHToBB_M125_13TeV_amcatnlo_pythia8/
+
+
+#name=WminusHbb_powheg site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/WminusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8/
+#name=WplusHbb_powheg  site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/WplusH_HToBB_WToQQ_M125_13TeV_powheg_pythia8/
+#name=ZHbb_powheg  site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/ZH_HToBB_ZToQQ_M125_13TeV_powheg_pythia8/ 
+
+#name=ggHbb_herwig	site=root://stormgf1.pi.infn.it:1094/ dir=/store/user/tboccali/Ntuples_v25/GluGluHToBB_M125_13TeV_powheg_herwigpp/
+#name=ggHbb_amc		site=root://stormgf1.pi.infn.it:1094/ dir=/store/user/tboccali/Ntuples_v25/GluGluHToBB_M125_13TeV_amcatnloFXFX_pythia8/
+#name=ggHbb		site=root://stormgf1.pi.infn.it:1094/ 	dir=/store/user/tboccali/Ntuples_v25/GluGluHToBB_M125_13TeV_powheg_pythia8/
+
+name=ttHbb			site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/vbfHbb/V25/ttHTobb_M125_TuneCUETP8M2_ttHtranche3_13TeV-powheg-pythia8/
+name=ttHnonbb		site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/vbfHbb/V25/ttHToNonbb_M125_TuneCUETP8M2_ttHtranche3_13TeV-powheg-pythia8/
+#name=bbH_yb2			site=root://stormgf1.pi.infn.it:1094/ dir=/store/user/tboccali/Ntuples_v25/bbHToBB_M-125_4FS_yb2_13TeV_amcatnlo/
+#name=bbH_ybyt			site=root://stormgf1.pi.infn.it:1094/ dir=/store/user/tboccali/Ntuples_v25/bbHToBB_M-125_4FS_ybyt_13TeV_amcatnlo/
+
+#name=WW   site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/WW_TuneCUETP8M1_13TeV-pythia8/ 
+#name=ZZ   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/ZZ_TuneCUETP8M1_13TeV-pythia8/ 
+#name=WZ   site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/WZ_TuneCUETP8M1_13TeV-pythia8/ 
+
+
+#name=BTagCSV site=root://stormgf1.pi.infn.it:1094/  dir=/store/user/arizzi/VHBBHeppyV25b/BTagCSV/
+
+#name=QCD_HT100to200   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/QCD_HT100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/         
+#name=QCD_HT200to300   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/QCD_HT200to300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/    
+#name=QCD_HT300to500   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/QCD_HT300to500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/   
+#name=QCD_HT500to700   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/  
+#name=QCD_HT700to1000   site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/ 
+#name=QCD_HT1000to1500   site=root://stormgf1.pi.infn.it:1094/  dir=/store/user/tboccali/Ntuples_v25/QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/ 
+#name=QCD_HT1500to2000  site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/ 
+#name=QCD_HT2000toInf   site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/    
+#
+
+
+#name=DYJetsToQQ    site=root://stormgf1.pi.infn.it:1094/  dir=/store/user/tboccali/Ntuples_v25/DYJetsToQQ_HT180_13TeV-madgraphMLM-pythia8/
+#name=WJetsToQQ		  site=root://stormgf1.pi.infn.it:1094/	 dir=/store/user/tboccali/Ntuples_v25/WJetsToQQ_HT180_13TeV-madgraphMLM-pythia8/
+#name=DYJetstoLL_amc_0J	site=root://eoscms.cern.ch/    dir=/store/group/phys_higgs/hbb/ntuples/V25/DYToLL_0J_13TeV-amcatnloFXFX-pythia8/    
+#name=DYJetstoLL_amc_1J	site=root://eoscms.cern.ch/    dir=/store/group/phys_higgs/hbb/ntuples/V25/DYToLL_1J_13TeV-amcatnloFXFX-pythia8/   
+#name=DYJetstoLL_amc_2J	site=root://eoscms.cern.ch/    dir=/store/group/phys_higgs/hbb/ntuples/V25/DYToLL_2J_13TeV-amcatnloFXFX-pythia8/ 
+#name=WJetsToLnu_madgraph site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/WJetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/
+
+#name=WJetsToLnu_HT70to100	 site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/WJetsToLNu_HT-70To100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/
+#name=WJetsToLnu_HT100to200	  site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/WJetsToLNu_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/
+#name=WJetsToLnu_HT200to400	 site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/WJetsToLNu_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/
+#name=WJetsToLnu_HT400to600	 site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/WJetsToLNu_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/
+#name=WJetsToLnu_HT600to800	 site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/WJetsToLNu_HT-600To800_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/
+#name=WJetsToLnu_HT800to1200	 site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/WJetsToLNu_HT-800To1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/
+#name=WJetsToLnu_HT1200to2500	 site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/WJetsToLNu_HT-1200To2500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/
+#name=WJetsToLnu_HT2500toInf	 site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/WJetsToLNu_HT-2500ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/
+
+
+
+#name=ST_tW_top   site=root://stormgf1.pi.infn.it:1094/    dir=/store/user/tboccali/Ntuples_v25/ST_tW_top_5f_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M2T4/
+#name=ST_tW_antitop    site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/ST_tW_antitop_5f_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M2T4/
+#name=ST_t_top   site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/ST_t-channel_top_4f_inclusiveDecays_13TeV-powhegV2-madspin-pythia8_TuneCUETP8M1/
+#name=ST_t_antitop   site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/ST_t-channel_antitop_4f_inclusiveDecays_13TeV-powhegV2-madspin-pythia8_TuneCUETP8M1/
+#name=ST_s    site=root://stormgf1.pi.infn.it:1094/   dir=/store/user/tboccali/Ntuples_v25/ST_s-channel_4f_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1/
+#name=ST_s_inclusive   site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/vbfHbb/V25/ST_s-channel_4f_InclusiveDecays_13TeV-amcatnlo-pythia8/
+
+
+
+#name=TT site=root://eoscms.cern.ch/   dir=/store/group/phys_higgs/hbb/ntuples/V25/TT_TuneCUETP8M2T4_13TeV-powheg-pythia8/
