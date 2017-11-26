@@ -102,6 +102,7 @@ Goodness of the fit:
 combine  -M GoodnessOfFit ../datacards/datacard_vbfHbb_2016_m125.txt --X-rtd ADDNLL_RECURSIVE=0  --minimizerTolerance=0.0001 --algo=saturated
 ```
 
+
 # Bias studies
 Bias studies were done on several functions. Several scipts are available to extract expected limits, make toys, etc with other functions:
 ```
@@ -113,6 +114,9 @@ pdf_param_cfi.py
 ./mkDatacards_run2.py --workdir name_of_workdir --function expPow --bias true --CATS 0,2
 ```
 
+# Create datacards and templates with CAT-1 and CAT-2 
+One can simply change the code of mkTranferFunctions_run2.py, mkSigTemplates_run2.py and so on. I did not want to create a separate branch for this, and I just simply added the copies of mkTF,Sig,Bkg,Data,Datacard scipts with little change of the code so you can run on CAT -1 and -2 and renamed it to "_cat.py" like mkDatacards_run2.py
+ 
 
 # Make tables of yields for AN and PAS
 ```
@@ -120,7 +124,13 @@ mkTable_yields.py
 mkTable_yieldsPAS.py
 ```
 
-#Scipts to make different kinds of plots
+# Scipts to make different kinds of plots
+
+plot the results of the fit, PAS/paper plots:
+Be aware that root file name with the fitted result and the datacards/templates directories is hardcoded. Change it!
+```
+root -l ptBestFit.C'(5.,0,"125","","")'
+```
 plot loglikelihood 
 ```
 loglikelihood_value.py
@@ -138,6 +148,11 @@ plot for goodness of fit agreement between toys and observed
 ```
 GoF_p_value.py
 ```
+plot polynomial with fitted coefficiants to visualize:
+```
+brn.py
+```
+
 
 
 
