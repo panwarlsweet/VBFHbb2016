@@ -101,7 +101,9 @@ Goodness of the fit:
 ```
 combine  -M GoodnessOfFit ../datacards/datacard_vbfHbb_2016_m125.txt --X-rtd ADDNLL_RECURSIVE=0  --minimizerTolerance=0.0001 --algo=saturated
 ```
-
+Here are couple of scipts how the toys were submitted:
+src/nolimit/
+and in toys_Fit one can find new plotting scipts for toys/data agreements
 
 # Bias studies
 Bias studies were done on several functions. Several scipts are available to extract expected limits, make toys, etc with other functions:
@@ -113,6 +115,17 @@ pdf_param_cfi.py
 ./mkBiasTemplates_run2.py --workdir name_of_workdir --function expPow
 ./mkDatacards_run2.py --workdir name_of_workdir --function expPow --bias true --CATS 0,2
 ```
+Several scipts are availbale here how I ran the toys for bias studies:
+```
+VBF_combine/toolkit/src/bias
+```
+And to plot injected/fitted models in scipts:
+```
+bias.py
+bias_plot.py
+```
+
+
 
 # Create datacards and templates with CAT-1 and CAT-2 
 One can simply change the code of mkTranferFunctions_run2.py, mkSigTemplates_run2.py and so on. I did not want to create a separate branch for this, and I just simply added the copies of mkTF,Sig,Bkg,Data,Datacard scipts with little change of the code so you can run on CAT -1 and -2 and renamed it to "_cat.py" like mkDatacards_run2.py
