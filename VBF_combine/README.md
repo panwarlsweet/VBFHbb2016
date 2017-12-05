@@ -34,7 +34,7 @@ You have to create 2 json files vbfHbb_samples_2016_bkg.json and vbfHbb_samples_
 ```
 ./write_samples.py -i path_to_sample/sample.root,path_to_sample2/sample2.root,... -b  vbfHbb_info_2016.json -o vbfHbb_samples_2016_bkg.json
 ```
-
+Very explicit instuctions how to run this write_samples are given in another README "README_Change_paths.md"
 
 All uncertainties are stores here:
 ```
