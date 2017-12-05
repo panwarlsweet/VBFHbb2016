@@ -22,7 +22,8 @@ All code needed to make final limits from the prepared inputs is here
 ```
 VBFHbb2016/VBF_combine/
 ```
-__First you can simply go to the section  'Running limits' of this readme and just run the expected limits. Make sure that you get the same results as quoted in the AN/PAS__
+__First you can simply go to the section  'Running limits' of this readme and just run the expected limits. Make sure that you get the same results as quoted in the AN/PAS__ 
+When you run these make sure you open the datacard file first and change the path to the root template file to wherever you are going to copy it to.
 
 Once this step is done, you can create datacards and templates yourself following the instructions below.
 
