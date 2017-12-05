@@ -29,6 +29,7 @@ In the VBFHbb2016/VBF_combine/common/ first info file vbfHbb_info_2016.json has 
 
 Then using just created info file one runs scripts to get json with full sample paths, names, cross-sections, etc and obtain vbfHbb_samples_2016_sig/bkg.json 
 __This you have to run yourself in order to set YOUR paths to the root files__
+You have to create 2 json files vbfHbb_samples_2016_bkg.json and vbfHbb_samples_2016_sig.json   for background and signal. For the data file BTagCSV we just put the path explicitely in mkDataTemplates_run2.py file, e.g. you would have to change it with your path.
  
 ```
 ./write_samples.py -i path_to_sample/sample.root,path_to_sample2/sample2.root,... -b  vbfHbb_info_2016.json -o vbfHbb_samples_2016_bkg.json
