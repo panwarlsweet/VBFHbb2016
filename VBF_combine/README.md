@@ -52,7 +52,9 @@ styleCMSTDR.C
 ```
 
 ### Preparing templates and datacards
-All templates are prepared using the following scripts. Bining, order of polynomials, category boundaries can be passed as an argument. If not specifically passed then default ones are used.
+First of all the framework is set up using 'toolkit' scipt that you can find in toolkit/common. All functions that you dont know where they aer coming from can be found there.
+All templates are prepared using the following scripts. Bining, order of polynomials, category boundaries can be passed as an argument. If not specifically passed then default ones are used. 
+__In all scripts that starts with 'mk' (make) you will see that there is a loop over Categories (SC.selections) and Tags(SingleB and DoubleB) S.tag__
 
 1. Create Transfer functions prefit
 ```
