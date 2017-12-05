@@ -9,22 +9,31 @@ All inputs can be found here :
 ```
 /afs/cern.ch/user/n/nchernya/public/VBFHbb2016/inputs/
 ```
+Ready to use datacards can be found here : /afs/cern.ch/user/n/nchernya/public/VBFHbb2016/datacards
+Ready to use templates can be found here : /afs/cern.ch/user/n/nchernya/public/VBFHbb2016/root
+
 All code needed to make final limits from the prepared inputs is here 
 ```
 VBFHbb2016/VBF_combine/
 ```
+__First you can simply go to the section  'Running limits' of this readme and just run the expected limits. Make sure that you get the same results as quoted in the AN/PAS__
+
+Once this step is done, you can create datacards and templates yourself following the instructions below.
+
 
 ## Preparing templates and datacards
  
 ### Scripts for initial set up of bkg,sig names , cross sections and etc. (This step can be ommited since set up is already done)
 
-In the VBFHbb2016/VBF_combine/common/ first info file vbfHbb_info_2016.json has to be prepared with short names of sig,bkg,data samples, cross sections.
+In the VBFHbb2016/VBF_combine/common/ first info file vbfHbb_info_2016.json has to be prepared with short names of sig,bkg,data samples, cross sections.__This is already done, you dont have to touch it at all.__
 
-Then using just created info file one runs scripts to get json with full sample paths, names, cross-sections, etc and obtain vbfHbb_samples_2016_sig/bkg.json
+Then using just created info file one runs scripts to get json with full sample paths, names, cross-sections, etc and obtain vbfHbb_samples_2016_sig/bkg.json 
+__This you have to run yourself in order to set YOUR paths to the root files__
  
 ```
 ./write_samples.py -i path_to_sample/sample.root,path_to_sample2/sample2.root,... -b  vbfHbb_info_2016.json -o vbfHbb_samples_2016_bkg.json
 ```
+
 
 All uncertainties are stores here:
 ```
