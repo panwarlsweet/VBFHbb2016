@@ -9,8 +9,14 @@ All inputs can be found here :
 ```
 /afs/cern.ch/user/n/nchernya/public/VBFHbb2016/inputs/
 ```
-Ready to use datacards can be found here : /afs/cern.ch/user/n/nchernya/public/VBFHbb2016/datacards
-Ready to use templates can be found here : /afs/cern.ch/user/n/nchernya/public/VBFHbb2016/root
+Ready to use datacards can be found here : 
+```
+/afs/cern.ch/user/n/nchernya/public/VBFHbb2016/datacards
+```
+Ready to use templates can be found here :
+```
+/afs/cern.ch/user/n/nchernya/public/VBFHbb2016/root
+```
 
 All code needed to make final limits from the prepared inputs is here 
 ```
