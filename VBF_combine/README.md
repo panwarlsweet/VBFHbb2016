@@ -98,7 +98,7 @@ combine -M ProfileLikelihood --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND -
 #### Make impacts:
 Firt you do Initial Fit:
 ```
- combineTool.py -M Impacts  -d ../new/datacards/datacard_vbfHbb_m125.root  -m 125 --doInitialFit --robustFit 1 --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND --X-rtd ADDNLL_RECURSIVE=0  --minimizerAlgoForMinos Minuit2,Migrad  --preFitValue=1.0 --rMin=-10 --rMax=10 --setPhysicsModelParameterRanges r=-10,10 --expectSignal=1 -t -1
+combineTool.py -M Impacts  -d datacard_vbfHbb_m125.root   -m 125 --doInitialFit --robustFit 1  --X-rtd ADDNLL_RECURSIVE=0  --minimizerAlgoForMinos Minuit2,Migrad  --preFitValue=1.0 --rMin=-10 --rMax=10 --setPhysicsModelParameterRanges r=-10,10 --expectSignal=1 -t -1
 ```
 output you get : 
  --- MultiDimFit ---
@@ -107,11 +107,11 @@ best fit parameter values and profile-likelihood uncertainties:
 
 Now you do the man fit :
 ```
-combineTool.py -M Impacts -d  ../new/datacards/datacard_vbfHbb_m125.root   -m 125 --robustFit 1 --doFits --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND --X-rtd ADDNLL_RECURSIVE=0  --minimizerAlgoForMinos Minuit2,Migrad   --preFitValue=1.0 --setPhysicsModelParameterRanges r=-10,10  --parallel 10 --expectSignal=1 -t -1
+combineTool.py -M Impacts -d  datacard_vbfHbb_m125.root  -m 125 --robustFit 1 --doFits --X-rtd ADDNLL_RECURSIVE=0  --minimizerAlgoForMinos Minuit2,Migrad   --preFitValue=1.0 --setPhysicsModelParameterRanges r=-10,10  --parallel 10 --expectSignal=1 -t -1
 ```
 Now you run impacts : 
 ```
- combineTool.py -M Impacts -d ../new/datacards/datacard_vbfHbb_m125.root -m 125 -o impacts.json
+ combineTool.py -M Impacts -d  datacard_vbfHbb_m125.root -m 125 -o impacts.json
 ```
 Now you plot impacts with the newly produced json
 ```
