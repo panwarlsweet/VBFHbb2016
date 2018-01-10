@@ -95,11 +95,27 @@ combine -M Asymptotic --run expected -v 2 --X-rtd FITTER_NEVER_GIVE_UP --X-rtd F
 combine -M ProfileLikelihood --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND --X-rtd ADDNLL_RECURSIVE=0 --X-rtd FITTER_NEW_CROSSING_ALGO --significance -t -1 --expectSignal=1 ../datacards/datacard_m125.txt
 
 ```
-To make impacts:
+#### Make impacts:
+Firt you do Initial Fit:
 ```
-combineTool.py -M Impacts  -d ../datacards/datacard_vbfHbb_m125.root  -m 125 --doInitialFit --robustFit 1 --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND --X-rtd ADDNLL_RECURSIVE=0  --minimizerAlgoForMinos Minuit2,Migrad  --preFitValue=1.0 --rMin=-10 --rMax=10 --setPhysicsModelParameterRanges r=-10,10 --expectSignal=1 -t -1
-plotImpacts.py -i impacts.json -o impacts
+ combineTool.py -M Impacts  -d ../new/datacards/datacard_vbfHbb_m125.root  -m 125 --doInitialFit --robustFit 1 --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND --X-rtd ADDNLL_RECURSIVE=0  --minimizerAlgoForMinos Minuit2,Migrad  --preFitValue=1.0 --rMin=-10 --rMax=10 --setPhysicsModelParameterRanges r=-10,10 --expectSignal=1 -t -1
+```
+output you get : 
+ --- MultiDimFit ---
+best fit parameter values and profile-likelihood uncertainties:
+   r :    +1.000   -X.XX/+X.XX (68%)
 
+Now you do the man fit :
+```
+combineTool.py -M Impacts -d  ../new/datacards/datacard_vbfHbb_m125.root   -m 125 --robustFit 1 --doFits --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND --X-rtd ADDNLL_RECURSIVE=0  --minimizerAlgoForMinos Minuit2,Migrad   --preFitValue=1.0 --setPhysicsModelParameterRanges r=-10,10  --parallel 10 --expectSignal=1 -t -1
+```
+Now you run impacts : 
+```
+ combineTool.py -M Impacts -d ../new/datacards/datacard_vbfHbb_m125.root -m 125 -o impacts.json
+```
+Now you plot impacts with the newly produced json
+```
+plotImpacts.py -i impacts.json -o impacts
 ```
 
 For CombinedLimit tool in order to run VBF Hbb this flag is necessary --X-rtd ADDNLL_RECURSIVE=0 , and the others are recommended:
@@ -107,7 +123,7 @@ For CombinedLimit tool in order to run VBF Hbb this flag is necessary --X-rtd AD
 --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND --X-rtd ADDNLL_RECURSIVE=0 --X-rtd FITTER_NEW_CROSSING_ALGO
 ```
 
-Get pulls:
+#### Get pulls:
 ```
 python /afs/cern.ch/user/n/nchernya/Hbb/newCombine/CMSSW_7_1_5/src/HiggsAnalysis/CombinedLimit/test/diffNuisances.py -a mlfitfit_number_1_nametag.root -g plots_fit_number_1_nametag.root
 
@@ -116,7 +132,7 @@ python /afs/cern.ch/user/n/nchernya/Hbb/newCombine/CMSSW_7_1_5/src/HiggsAnalysis
 ../ptNuisances.py plots_fit_number_1_nametag 125
 ```
 
-Goodness of the fit:
+#### Goodness of the fit:
 ```
 combine  -M GoodnessOfFit ../datacards/datacard_vbfHbb_2016_m125.txt --X-rtd ADDNLL_RECURSIVE=0  --minimizerTolerance=0.0001 --algo=saturated
 ```
