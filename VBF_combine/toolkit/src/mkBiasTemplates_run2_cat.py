@@ -426,9 +426,9 @@ def main():
 #		can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function))
 #		can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s.png"%(opts.workdir,can.GetName(),opts.function))
 
-		makeDirs("%s/plot/biasFunctions/"%opts.workdir)
-		can.SaveAs("%s/plot/biasFunctions/%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function))
-		can.SaveAs("%s/plot/biasFunctions/%s_%s.png"%(opts.workdir,can.GetName(),opts.function))
+#		makeDirs("%s/plot/biasFunctions/"%opts.workdir)
+#		can.SaveAs("%s/plot/biasFunctions/%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function))
+#		can.SaveAs("%s/plot/biasFunctions/%s_%s.png"%(opts.workdir,can.GetName(),opts.function))
 	
 #
 #--- end of SEL loop
