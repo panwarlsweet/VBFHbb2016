@@ -122,11 +122,11 @@ def RooDraw(opts,can,C,S,x,rh,model,qPDF,zPDF,tPDF,archive,chi2_val,n_param,titl
 	frametop.GetYaxis().SetLabelSize(0.035)
 	frametop.GetYaxis().SetTitleSize(0.055)
 	frametop.GetYaxis().SetTitleOffset(1.5);
-	frametop.GetYaxis().SetTitle("Events / %.1f GeV"%opts.dX[0])
+	frametop.GetYaxis().SetTitle("Events / %.1f GeV"%(opts.dX[0]))
 	frametop.Draw()
 	gPad.Update()
 	
-	ndf = int((opts.X[1]-opts.X[0])/opts.dX[0]) - (n_param)
+	ndf = int((opts.X[1]-opts.X[0])/(opts.dX[0])) - (n_param)
 	chi2=chi2_val/ndf
 	prob = ROOT.TMath.Prob(chi2_val,ndf)
 	print ndf
@@ -200,7 +200,7 @@ def main():
 	SC = opts.SC if not type(opts.SC)==str else SELsetup(opts.SC)
 	fTF = json.loads(filecontent("%s/vbfHbb_transfer_2016_run2_linear.json"%basepath))
 	LUMI = opts.LUMI
-	NBINS = [int((opts.X[1]-opts.X[0])/x) for x in opts.dX]	
+	NBINS = [int((opts.X[1]-opts.X[0])/(x)) for x in opts.dX]	
 	n_param = Nparam[opts.function] 
 	MASS=125
 
@@ -242,7 +242,7 @@ def main():
 # Selection loop
 	for iS,S in enumerate(SC.selections):
 ## Load tree
-		fin = TFile.Open("/afs/cern.ch/work/n/nchernya/VBFHbb_2016/VBF_combine/inputs/root/FitVBF_BTagCSV_analysis_%s_trignone_v25_VBF_newReg.root"%(str.lower(S.tag)),"read")
+		fin = TFile.Open("/afs/cern.ch/work/l/lata/VBF_Analysis/CMSSW_7_4_7/src/VBFHbb2016/VBF_combine/VBFHbb2016/inputs/FitVBF_BTagCSV_analysis_%s_trignone_v25_VBF_newReg.root"%(str.lower(S.tag)),"read")
 		T = fin.Get("VBF/events")
 ## Containers
 		brn          = {}
@@ -275,6 +275,9 @@ def main():
   ## x
   			x = RooRealVar("mbbReg_CAT%d"%Cp,"mbbReg_CAT%d"%Cp,opts.X[0],opts.X[1])
 			x_name="mbbReg_CAT%d"%Cp
+                        print x 
+          		print "test"
+			print x_name
 			trans_p = {}
   ## Transfer functions			
 			if not C==0:
@@ -302,21 +305,29 @@ def main():
   ### QCD part
 	  ### Containers
 			N = "CAT%d"%(Cp)
+                        print Cp
+                        print N
 			h[N]   = TH1F("hMbb_%s"%N,"hMbb_%s"%N,NBINS[iS],opts.X[0],opts.X[1])
 			hb[N]  = TH1F("hMbb_blind_%s"%N,"hMbb_blind_%s"%N,NBINS[iS],opts.X[0],opts.X[1])
 	  ### Define cut
+                        print S.boundaries[C]
+                        print S.boundaries[C+1]
 			cut    = TCut("(bdt_VBF>%1.4f && bdt_VBF<=%1.4f)"%(S.boundaries[C],S.boundaries[C+1]))
 			cutB   = TCut("(bdt_VBF>%1.4f && bdt_VBF<=%1.4f) && mbbRegFSR>100 && mbbRegFSR<150"%(S.boundaries[C],S.boundaries[C+1]))
 	  ### Draw
 	  		c0.cd()
+                        #c0.SetLogy()
 			T.Draw("mbbRegFSR>>%s"%(h[N].GetName()),cut)
+                        c0.SaveAs(N+"test.png")
 			T.Draw("mbbRegFSR>>%s"%(hb[N].GetName()),cutB)
+                        c0.SaveAs(N+"Btest.png")
 		#	for i in range(NBINS[iS]):
 		#		if h[N].GetBinContent(i+1) ==0 : print i
 			#	print h[N].GetBinContent(i+1)
 			#	print i
 	  ### Yields
 			Y[N]   = RooRealVar("yield_data_CAT%d"%Cp,"yield_data_CAT%d"%Cp,h[N].Integral())
+                        print h[N].Integral()
 	  ### Histograms
 			rh[N]  = RooDataHist("data_hist_CAT%d"%Cp,"data_hist_CAT%d"%Cp,RooArgList(x),h[N])
 			rhb[N] = RooDataHist("data_hist_blind_CAT%d"%Cp,"data_hist_blind_CAT%d"%Cp,RooArgList(x),hb[N])
@@ -400,6 +411,12 @@ def main():
 			for o in [rh[N],rhb[N],model[N],Y[N]]:
 				getattr(w,'import')(o,RooFit.RenameConflictNodes("(1)"))
 				if opts.verbosity>0 and not opts.quiet: o.Print()
+
+                        makeDirs("%s/plot/biasFunctionsCATS/"%opts.workdir)
+                        can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function,N))
+                        can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s_%s.png"%(opts.workdir,can.GetName(),opts.function,N))
+
+
 ###
 ###--- end of CAT loop
 ###

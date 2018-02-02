@@ -241,8 +241,13 @@ def main():
 
 # Selection loop
 	for iS,S in enumerate(SC.selections):
+                print "SC_selections"
+           	print SC.selections 
+                print S
+                print iS
+                print "end_SC_selections"
 ## Load tree
-		fin = TFile.Open("/afs/cern.ch/work/n/nchernya/VBFHbb_2016/VBF_combine/inputs/root/FitVBF_BTagCSV_analysis_%s_trignone_v25_VBF_newReg.root"%(str.lower(S.tag)),"read")
+		fin = TFile.Open("/afs/cern.ch/work/l/lata/VBF_Analysis/CMSSW_7_4_7/src/VBFHbb2016/VBF_combine/VBFHbb2016/inputs/FitVBF_BTagCSV_analysis_%s_trignone_v25_VBF_newReg.root"%(str.lower(S.tag)),"read")
 		T = fin.Get("VBF/events")
 ## Containers
 		brn          = {}
@@ -317,6 +322,8 @@ def main():
 			#	print i
 	  ### Yields
 			Y[N]   = RooRealVar("yield_data_CAT%d"%Cp,"yield_data_CAT%d"%Cp,h[N].Integral())
+			print "Yield:"
+			print h[N].Integral()
 	  ### Histograms
 			rh[N]  = RooDataHist("data_hist_CAT%d"%Cp,"data_hist_CAT%d"%Cp,RooArgList(x),h[N])
 			rhb[N] = RooDataHist("data_hist_blind_CAT%d"%Cp,"data_hist_blind_CAT%d"%Cp,RooArgList(x),hb[N])
@@ -400,6 +407,10 @@ def main():
 			for o in [rh[N],rhb[N],model[N],Y[N]]:
 				getattr(w,'import')(o,RooFit.RenameConflictNodes("(1)"))
 				if opts.verbosity>0 and not opts.quiet: o.Print()
+ 			makeDirs("%s/plot/biasFunctionsCATS/"%opts.workdir)
+                        can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function,N))
+                        can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s_%s.png"%(opts.workdir,can.GetName(),opts.function,N))
+
 ###
 ###--- end of CAT loop
 ###
@@ -408,7 +419,9 @@ def main():
 #		makeDirs("%s/plot/biasFunctionsCATS/"%opts.workdir)
 #		can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function))
 #		can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s.png"%(opts.workdir,can.GetName(),opts.function))
-
+                print "test....."
+                print N
+                print "test....end"
 		makeDirs("%s/plot/biasFunctions/"%opts.workdir)
 		can.SaveAs("%s/plot/biasFunctions/%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function))
 		can.SaveAs("%s/plot/biasFunctions/%s_%s.png"%(opts.workdir,can.GetName(),opts.function))
