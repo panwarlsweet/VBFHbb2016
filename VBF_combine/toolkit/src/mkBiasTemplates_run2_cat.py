@@ -53,7 +53,7 @@ def parser(mp=None):
 	mg2.add_option('--bounds',help=colours[5]+'Template boundaries: 80,200 (min,max)'+colours[0],default=[80.,200.],type='str',action='callback',callback=optsplitfloat,dest='X')
 	mg2.add_option('--binwidth',help=colours[5]+'Template bin width: 0.1,0.1 (Single,Double)'+colours[0],default=[0.1,0.1],type='str',action='callback',callback=optsplitfloat,dest='dX')
 	mg2.add_option('--lumi',help=colours[5]+'Luminosity: 35900(single,double)'+colours[0],default=[35900,35900.],type='str',action='callback',callback=optsplitfloat,dest='LUMI')
-	mg2.add_option('--TF',help=colours[5]+'Transfer function label: POL1,POL1 (Single,Double)'+colours[0],default=['POL1','POL1'],type='str',action='callback',callback=optsplit)
+	mg2.add_option('--TF',help=colours[5]+'Transfer function label: POL1,POL1 (Single,Double)'+colours[0],default=['POL2','POL4'],type='str',action='callback',callback=optsplit)
 	mg2.add_option('--function',help=colours[5]+'Function for bias study :  expPow'+colours[0],default='expPow',type='str')
 	mg2.add_option('--forfit',help=colours[5]+'Freeze/free parameters for fit or not (for toys)'+colours[0],default=True,action='store_false')
 	mp.add_option_group(mg2)
@@ -93,7 +93,7 @@ def gaStyle(g,i):
 	g.SetFillStyle(1001)
 
 ####################################################################################################
-def RooDraw(opts,can,C,S,x,rh,model,qPDF,zPDF,tPDF,archive,chi2_val,n_param,title):
+def RooDraw(opts,can,C,S,x,rh,model,qPDF,zPDF,tPDF,archive,chi2_val,n_param,title,ks):
 #	can.cd(C+1)
 	can.cd(0)
 	can.SetTitle(title)
@@ -132,7 +132,7 @@ def RooDraw(opts,can,C,S,x,rh,model,qPDF,zPDF,tPDF,archive,chi2_val,n_param,titl
 	print ndf
 	print chi2_val
 	print prob
-		
+	print "this is  what I want...."	
 	
 # part 2
 	pad = TPad("pad","pad",0.,0.,1.,1.)
@@ -172,6 +172,7 @@ def RooDraw(opts,can,C,S,x,rh,model,qPDF,zPDF,tPDF,archive,chi2_val,n_param,titl
 	pave.AddText("%s"%title)
 	pave.AddText("#chi^{2}=%.2f"%chi2)
 	pave.AddText("Prob=%.2f"%prob)
+	pave.AddText("ks=%.2f"%ks)
 	pave.Draw()
 	framebot.addObject(pave)
 	print 'here'
@@ -220,7 +221,8 @@ def main():
 	h   = {}
 	hb  = {}
 	Y   = {}
-	
+        fout = ROOT.TFile('h_fun.root', 'RECREATE')
+	fout.cd()	
 ## CMS info
 	left,right,top,bottom = gStyle.GetPadLeftMargin(),gStyle.GetPadRightMargin(),gStyle.GetPadTopMargin(),gStyle.GetPadBottomMargin()
 	pCMS1 = TPaveText(left,1.-top,0.4,1.,"NDC")
@@ -258,9 +260,9 @@ def main():
 		can = TCanvas("canD_sel%s"%S.tag,"%s"%opts.function,600,600)
 #		can.Divide(2,2)
 ## Category loop
-		for C in range(S.ncat):
-#		if (1>0):
-#			C=0
+#		for C in range(S.ncat):
+		if (1>0):
+			C=0
 			Cp = C + sum([x for x in SC.ncats[0:iS]])
 ####################################################################################################
 #### Start of RooFit part 
@@ -327,11 +329,12 @@ def main():
 			#	print i
 	  ### Yields
 			Y[N]   = RooRealVar("yield_data_CAT%d"%Cp,"yield_data_CAT%d"%Cp,h[N].Integral())
-                        print h[N].Integral()
+			print h[N].Integral()
 	  ### Histograms
 			rh[N]  = RooDataHist("data_hist_CAT%d"%Cp,"data_hist_CAT%d"%Cp,RooArgList(x),h[N])
 			rhb[N] = RooDataHist("data_hist_blind_CAT%d"%Cp,"data_hist_blind_CAT%d"%Cp,RooArgList(x),hb[N])
-
+#			#h_data = rh[N].createHistogram('h_data',x)
+#			#print "h_data_integral=%.3f"%(h_data.Integral())
   ### Model
 			print Cp
 			if Cp==0 or Cp==4:
@@ -375,10 +378,10 @@ def main():
 #			ySGF  = wSIG.var("yield_signalGF_mass%d_CAT%d"%(MASS,Cp))
 #			yS    = RooRealVar("yield_signal_mass%d_CAT%d"%(MASS,Cp),"yield_signal_mass%d_CAT%d"%(MASS,Cp),ySVBF.getValV()+ySGF.getValV(),0.,400.)
 
+
   ### Combined model
 	  	#	model[N] = RooAddPdf("bkg_model_CAT%d"%(Cp),"bkg_model_CAT%d"%(Cp),RooArgList(zPDF[N],tPDF[N],qcd_pdf[N]),RooArgList(yZ[N],yT[N],yQ[N]))
 	  		model[N] = RooAddPdf("bkg_model_%s_CAT%d"%(opts.TF[iS],Cp),"bkg_model_%s_CAT%d"%(opts.TF[iS],Cp),RooArgList(zPDF[N],tPDF[N],qcd_pdf[N]),RooArgList(yZ[N],yT[N],yQ[N]))
-			
   ### Fit
 	  		res   = model[N].fitTo(rh[N],RooFit.Save(),RooFit.Warnings(ROOT.kTRUE))
 			for gc in gcs_aux :
@@ -388,9 +391,21 @@ def main():
 
 			chi2 = RooChi2Var("chi2", "chi2", model[N], rh[N])
 			chi2_val = chi2.getVal()
+			print 'Yields Z,Top,QCD: ', yZ[N].getVal(),yT[N].getVal(),yQ[N].getVal()
+		        total_fitted_yield = yZ[N].getVal()+yT[N].getVal()+yQ[N].getVal()
+			h_data = rh[N].createHistogram('h_data',x)
+                        print "h_data_integral=%.3f"%(h_data.Integral())
+			h_func = model[N].createHistogram('h_func',x)
+                        print "h_func_integral=%.3f"%(h_func.Integral())
+			h_func.Scale(total_fitted_yield/h_func.Integral())
+			h_func.SetLineColor(kRed)
+                        h_func.SetLineWidth(3)
+			print "h_func integral after scaling=%.2f"%(h_func.Integral())
+			ks = h_func.KolmogorovTest(h_data,'NN')
+			print 'KS probability = ',ks
 
   ### Draw
-  			RooDraw(opts,can,C,S,x,rh[N],model[N],qcd_pdf[N],zPDF[N],tPDF[N],archive,chi2_val,n_param,opts.function)
+  			RooDraw(opts,can,C,S,x,rh[N],model[N],qcd_pdf[N],zPDF[N],tPDF[N],archive,chi2_val,n_param,opts.function,ks)
 		#	can.cd(C+1)
 			can.cd(0)
 			pCMS1.Draw()
@@ -411,10 +426,11 @@ def main():
 			for o in [rh[N],rhb[N],model[N],Y[N]]:
 				getattr(w,'import')(o,RooFit.RenameConflictNodes("(1)"))
 				if opts.verbosity>0 and not opts.quiet: o.Print()
-
-                        makeDirs("%s/plot/biasFunctionsCATS/"%opts.workdir)
-                        can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function,N))
-                        can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s_%s.png"%(opts.workdir,can.GetName(),opts.function,N))
+			h_func.Draw("same")
+                        """makeDirs("%s/plot/biasFunctionsCATS/"%opts.workdir)
+         		if N=='CAT0' or N=='CAT4':
+                          can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function,N))
+                          can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s_%s.png"%(opts.workdir,can.GetName(),opts.function,N))"""
 
 
 ###
@@ -426,9 +442,9 @@ def main():
 #		can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function))
 #		can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s.png"%(opts.workdir,can.GetName(),opts.function))
 
-#		makeDirs("%s/plot/biasFunctions/"%opts.workdir)
-#		can.SaveAs("%s/plot/biasFunctions/%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function))
-#		can.SaveAs("%s/plot/biasFunctions/%s_%s.png"%(opts.workdir,can.GetName(),opts.function))
+		makeDirs("%s/plot/biasFunctions/"%opts.workdir)
+		can.SaveAs("%s/plot/biasFunctions/%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function))
+		can.SaveAs("%s/plot/biasFunctions/%s_%s.png"%(opts.workdir,can.GetName(),opts.function))
 	
 #
 #--- end of SEL loop
@@ -438,7 +454,6 @@ def main():
 #	w.writeToFile("%s/root/biasCATS_shapes_workspace_%s.root"%(opts.workdir,opts.function))
 	w.writeToFile("%s/root/bias_shapes_workspace_%s.root"%(opts.workdir,opts.function))
 	print "Done."
-
 ####################################################################################################
 if __name__=='__main__':
 	main()
