@@ -33,6 +33,27 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
 	#	name = "qcd_model_POL1POL1_CAT%d"%cat_num
 		pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
 
+	elif pdf_name=="expPow2":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                        const30 = '30'
+                formula = "TMath::Power((%s-%s),%s)*TMath::Exp(-1*%s*TMath::Power(%s,%s)-%s)"%(x_name,const30,brn_names[0],brn_names[1],x_name,brn_names[2],brn_names[3])
+                coeff.add(x)
+                name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
+        #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+
 	elif pdf_name=="expPol1":
                 coeff.removeAll()
                 brn = {}
@@ -47,8 +68,7 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         coeff.add(brn[nb])
                         gcs.append(brn[nb])
                         const30 = '30'
-            #    formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
-                formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1))"%(brn_names[0],x_name)
+                formula = "TMath::Exp(-1*%s*TMath::Power(%s,1))"%(brn_names[0],x_name)
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #	name = "qcd_model_POL1POL1_CAT%d"%cat_num
@@ -69,7 +89,7 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         gcs.append(brn[nb])
                         const30 = '30'
             #    formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
-                formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2))"%(brn_names[0],x_name,brn_names[1],x_name)
+                formula = "TMath::Exp(-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2))"%(brn_names[0],x_name,brn_names[1],x_name)
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
@@ -90,7 +110,7 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         gcs.append(brn[nb])
                         const30 = '30'
             #    formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
-                formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name)
+                formula = "TMath::Exp(-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name)
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
@@ -111,7 +131,7 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         gcs.append(brn[nb])
                         const30 = '30'
             #    formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
-                formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
+                formula = "TMath::Exp(-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
@@ -132,7 +152,7 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         gcs.append(brn[nb])
                         const30 = '30'
             #    formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
-                formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4)-1*%s*TMath::Power(%s,5))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name)
+                formula = "TMath::Exp(-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4)-1*%s*TMath::Power(%s,5))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name)
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
@@ -153,7 +173,7 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         gcs.append(brn[nb])
                         const30 = '30'
             #    formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
-                formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4)-1*%s*TMath::Power(%s,5)-1*%s*TMath::Power(%s,6))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name,brn_names[5],x_name)
+                formula = "TMath::Exp(-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4)-1*%s*TMath::Power(%s,5)-1*%s*TMath::Power(%s,6))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name,brn_names[5],x_name)
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
@@ -174,7 +194,7 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         gcs.append(brn[nb])
                         const30 = '30'
             #    formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
-                formula = "TMath::Exp(1-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4)-1*%s*TMath::Power(%s,5)-1*%s*TMath::Power(%s,6)-1*%s*TMath::Power(%s,7))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name,brn_names[5],x_name,brn_names[6],x_name)
+                formula = "TMath::Exp(-1*%s*TMath::Power(%s,1)-1*%s*TMath::Power(%s,2)-1*%s*TMath::Power(%s,3)-1*%s*TMath::Power(%s,4)-1*%s*TMath::Power(%s,5)-1*%s*TMath::Power(%s,6)-1*%s*TMath::Power(%s,7))"%(brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name,brn_names[5],x_name,brn_names[6],x_name)
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
@@ -215,7 +235,8 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         coeff.add(brn[nb])
                         gcs.append(brn[nb])
                         const30 = '30'
-                formula = "%s^(1+%s*TMath::Power(%s,1))"%(x_name,brn_names[0],x_name)
+                formula = "TMath::Power(%s,(%s+%s*%s))"%(x_name,brn_names[0],brn_names[1],x_name)
+		
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
@@ -235,7 +256,7 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         coeff.add(brn[nb])
                         gcs.append(brn[nb])
                         const30 = '30'
-                formula = "%s^(1+%s*TMath::Power(%s,1)+%s*TMath::Power(%s,2))"%(x_name,brn_names[0],x_name,brn_names[1],x_name)
+                formula = "TMath::Power(%s,%s+%s*TMath::Power(%s,1)+%s*TMath::Power(%s,2))"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],x_name)
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
@@ -255,11 +276,51 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
                         coeff.add(brn[nb])
                         gcs.append(brn[nb])
                         const30 = '30'
-                formula = "%s^(1+%s*TMath::Power(%s,1)+%s*TMath::Power(%s,2)+%s*TMath::Power(%s,3))"%(x_name,brn_names[0],x_name,brn_names[1],x_name,brn_names[2],x_name)
+                formula = "TMath::Power(%s,%s+%s*TMath::Power(%s,1)+%s*TMath::Power(%s,2)+%s*TMath::Power(%s,3))"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name)
                 coeff.add(x)
                 name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
         #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
                 pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="x^Pol4":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                 #      brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                        const30 = '30'
+                formula = "TMath::Power(%s,%s+%s*TMath::Power(%s,1)+%s*TMath::Power(%s,2)+%s*TMath::Power(%s,3)+%s*TMath::Power(%s,4))"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name)
+                coeff.add(x)
+                name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
+        #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="x^Pol5":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                 #      brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                        const30 = '30'
+                formula = "TMath::Power(%s,%s+%s*TMath::Power(%s,1)+%s*TMath::Power(%s,2)+%s*TMath::Power(%s,3)+%s*TMath::Power(%s,4)+%s*TMath::Power(%s,5))"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name,brn_names[5],x_name)
+                coeff.add(x)
+                name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
+        #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )	
 
 	elif pdf_name=="Pol1exp":
                 coeff.removeAll()
@@ -642,7 +703,108 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
 	#	name = "qcd_model_"+pdf_name+"_CAT0"
 		name = "qcd_model_POL1POL1_CAT%d"%cat_num
 		pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
-	elif pdf_name=="tanhPol2":            
+
+	elif pdf_name=="modG2":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                #       nb = "b%d_%s_CAT0"%(p,pdf_name)
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "TMath::Exp(-1.*%s*%s-%s*TMath::Power(%s,2))*TMath::Erfc(%s-%s*%s)"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],brn_names[3],x_name)
+                coeff.add(x)
+        #       name = "qcd_model_"+pdf_name+"_CAT0"
+                name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="modG3":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                #       nb = "b%d_%s_CAT0"%(p,pdf_name)
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "TMath::Exp(-1.*%s*%s-%s*TMath::Power(%s,2)-%s*TMath::Power(%s,3))*TMath::Erfc(%s-%s*%s)"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],x_name,brn_names[3],brn_names[4],x_name)
+                coeff.add(x)
+        #       name = "qcd_model_"+pdf_name+"_CAT0"
+                name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="modG4":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                #       nb = "b%d_%s_CAT0"%(p,pdf_name)
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "TMath::Exp(-1.*%s*%s-%s*TMath::Power(%s,2)-%s*TMath::Power(%s,3)-%s*TMath::Power(%s,4))*TMath::Erfc(%s-%s*%s)"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],brn_names[5],x_name)
+                coeff.add(x)
+        #       name = "qcd_model_"+pdf_name+"_CAT0"
+                name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="modG5":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                #       nb = "b%d_%s_CAT0"%(p,pdf_name)
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "TMath::Exp(-1.*%s*%s-%s*TMath::Power(%s,2)-%s*TMath::Power(%s,3)-%s*TMath::Power(%s,4)-%s*TMath::Power(%s,5))*TMath::Erfc(%s-%s*%s)"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name,brn_names[5],brn_names[6],x_name)
+                coeff.add(x)
+        #       name = "qcd_model_"+pdf_name+"_CAT0"
+                name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="modG6":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                #       nb = "b%d_%s_CAT0"%(p,pdf_name)
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "TMath::Exp(-1.*%s*%s-%s*TMath::Power(%s,2)-%s*TMath::Power(%s,3)-%s*TMath::Power(%s,4)-%s*TMath::Power(%s,5)-%s*TMath::Power(%s,6))*TMath::Erfc(%s-%s*%s)"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],x_name,brn_names[5],x_name,brn_names[6],brn_names[7],x_name)
+                coeff.add(x)
+        #       name = "qcd_model_"+pdf_name+"_CAT0"
+                name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="tanh2":            
 		coeff.removeAll()
 		brn = {}
 		brn_names = []
@@ -656,11 +818,12 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
 			brn[nb] = RooRealVar(nb,nb,pmin,pmax)
 			coeff.add(brn[nb])
 			gcs.append(brn[nb])
-		formula = "%s-TMath::TanH(%s*TMath::Power(%s,2)+%s*%s+%s)"%(brn_names[0],brn_names[1],x_name,brn_names[2],x_name,brn_names[3])
+		formula = "%s-%s*TMath::TanH(%s*%s-%s)-%s*TMath::Power(TMath::TanH(%s*%s-%s),2)"%(brn_names[0],brn_names[1],x_name,brn_names[2],brn_names[3],brn_names[4],x_name,brn_names[2],brn_names[3])
 		coeff.add(x)
 	#	name = "qcd_model_"+pdf_name+"_CAT0"
 		name = "qcd_model_POL1POL1_CAT%d"%cat_num
 		pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
 	elif pdf_name=="tanh":            
 		coeff.removeAll()
 		brn = {}
@@ -676,30 +839,92 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
 			brn[nb] = RooRealVar(nb,nb,pmin,pmax)
 			coeff.add(brn[nb])
 			gcs.append(brn[nb])
-		formula = "%s-TMath::TanH(%s*%s-%s)"%(brn_names[0],brn_names[1],x_name,brn_names[2])
+		formula = "%s-%s*TMath::TanH(%s*%s-%s)"%(brn_names[0],brn_names[1],x_name,brn_names[2],brn_names[3])
 		coeff.add(x)
 		name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
 	#	name = "qcd_model_POL1POL1_CAT%d"%cat_num
 		pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
-	elif pdf_name=="tanhPol3":            
-		coeff.removeAll()
-		brn = {}
-		brn_names = []
-		for p in xrange(n_param):   
-		#	nb = "b%d_%s_CAT0"%(p,pdf_name)
-			nb2 = "b%d_CAT0"%(p)
-			nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
-			brn_names.append(nb)
-		#	brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
-			[pmin,pmax] = Parameters[pdf_name][nb2] 
-			brn[nb] = RooRealVar(nb,nb,pmin,pmax)
-			coeff.add(brn[nb])
-			gcs.append(brn[nb])
-		formula = "TMath::TanH(%s*(%s-%s))*(%s*TMath::Power(%s,2)+%s*%s+1.)"%(brn_names[0],x_name,brn_names[1],brn_names[2],x_name,brn_names[3],x_name)
+
+	elif pdf_name=="tanh3":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                        nb = "b%d_%s_CAT%d"%(p,pdf_name,cat_num)
+                #	nb2 = "b%d_CAT%d"%(p,cat_num)
+                #	nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #	brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+		formula = "%s-%s*TMath::TanH(%s*%s-%s)-%s*TMath::Power(TMath::TanH(%s*%s-%s),2)-%s*TMath::Power(TMath::TanH(%s*%s-%s),3)"%(brn_names[0],brn_names[1],x_name,brn_names[2],brn_names[3],brn_names[4],x_name,brn_names[2],brn_names[3],brn_names[5],x_name,brn_names[2],brn_names[3])
 		coeff.add(x)
 	#	name = "qcd_model_"+pdf_name+"_CAT0"
 		name = "qcd_model_POL1POL1_CAT%d"%cat_num
 		pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="tanh4":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                        nb = "b%d_%s_CAT%d"%(p,pdf_name,cat_num)
+                #       nb2 = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "%s-%s*TMath::TanH(%s*%s-%s)-%s*TMath::Power(TMath::TanH(%s*%s-%s),2)-%s*TMath::Power(TMath::TanH(%s*%s-%s),3)-%s*TMath::Power(TMath::TanH(%s*%s-%s),4)"%(brn_names[0],brn_names[1],x_name,brn_names[2],brn_names[3],brn_names[4],x_name,brn_names[2],brn_names[3],brn_names[5],x_name,brn_names[2],brn_names[3],brn_names[6],x_name,brn_names[2],brn_names[3])
+                coeff.add(x)
+        #       name = "qcd_model_"+pdf_name+"_CAT0"
+                name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="tanh5":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                        nb = "b%d_%s_CAT%d"%(p,pdf_name,cat_num)
+                #       nb2 = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "%s-%s*TMath::TanH(%s*%s-%s)-%s*TMath::Power(TMath::TanH(%s*%s-%s),2)-%s*TMath::Power(TMath::TanH(%s*%s-%s),3)-%s*TMath::Power(TMath::TanH(%s*%s-%s),4)-%s*TMath::Power(TMath::TanH(%s*%s-%s),5)"%(brn_names[0],brn_names[1],x_name,brn_names[2],brn_names[3],brn_names[4],x_name,brn_names[2],brn_names[3],brn_names[5],x_name,brn_names[2],brn_names[3],brn_names[6],x_name,brn_names[2],brn_names[3],brn_names[7],x_name,brn_names[2],brn_names[3])
+                coeff.add(x)
+        #       name = "qcd_model_"+pdf_name+"_CAT0"
+                name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="tanh6":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                        nb = "b%d_%s_CAT%d"%(p,pdf_name,cat_num)
+                #       nb2 = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "%s-%s*TMath::TanH(%s*%s-%s)-%s*TMath::Power(TMath::TanH(%s*%s-%s),2)-%s*TMath::Power(TMath::TanH(%s*%s-%s),3)-%s*TMath::Power(TMath::TanH(%s*%s-%s),4)-%s*TMath::Power(TMath::TanH(%s*%s-%s),5)-%s*TMath::Power(TMath::TanH(%s*%s-%s),6)"%(brn_names[0],brn_names[1],x_name,brn_names[2],brn_names[3],brn_names[4],x_name,brn_names[2],brn_names[3],brn_names[5],x_name,brn_names[2],brn_names[3],brn_names[6],x_name,brn_names[2],brn_names[3],brn_names[7],x_name,brn_names[2],brn_names[3],brn_names[8],x_name,brn_names[2],brn_names[3])
+                coeff.add(x)
+        #       name = "qcd_model_"+pdf_name+"_CAT0"
+                name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
 	elif pdf_name=="sine":            
 		coeff.removeAll()
 		brn = {}
@@ -719,6 +944,86 @@ def generate_pdf(x=ROOT.RooRealVar(), pdf_name="Pol5",x_name='mbbReg_CAT0', sele
 		name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
  	#	name = "qcd_model_POL1POL1_CAT%d"%cat_num
 		pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="sine2":
+                coeff.removeAll()
+		brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                #       nb = "b%d_%s_CAT0"%(p,pdf_name)                                                       
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)                                          
+			brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)                                                 
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+		        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "(1+%s*TMath::Sin(%s*%s+%s)+%s*TMath::Power(TMath::Sin(%s*%s+%s),2))"%(brn_names[0],x_name,brn_names[1],brn_names[2],brn_names[3],x_name,brn_names[1],brn_names[2])
+                coeff.add(x)
+                name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
+        #       name = "qcd_model_POL1POL1_CAT%d"%cat_num                                                     
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+	elif pdf_name=="sine3":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                #	nb = "b%d_%s_CAT0"%(p,pdf_name)
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "(1+%s*TMath::Sin(%s*%s+%s)+%s*TMath::Power(TMath::Sin(%s*%s+%s),2)+%s*TMath::Power(TMath::Sin(%s*%s+%s),3))"%(brn_names[0],x_name,brn_names[1],brn_names[2],brn_names[3],x_name,brn_names[1],brn_names[2],brn_names[4],x_name,brn_names[1],brn_names[2])
+                coeff.add(x)
+                name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
+        #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="sine4":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                #       nb = "b%d_%s_CAT0"%(p,pdf_name)
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "(1+%s*TMath::Sin(%s*%s+%s)+%s*TMath::Power(TMath::Sin(%s*%s+%s),2)+%s*TMath::Power(TMath::Sin(%s*%s+%s),3)+%s*TMath::Power(TMath::Sin(%s*%s+%s),4))"%(brn_names[0],x_name,brn_names[1],brn_names[2],brn_names[3],x_name,brn_names[1],brn_names[2],brn_names[4],x_name,brn_names[1],brn_names[2],brn_names[5],x_name,brn_names[1],brn_names[2])
+                coeff.add(x)
+                name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
+        #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
+	elif pdf_name=="sine5":
+                coeff.removeAll()
+                brn = {}
+                brn_names = []
+                for p in xrange(n_param):
+                #       nb = "b%d_%s_CAT0"%(p,pdf_name)
+                        nb = "b%d_CAT%d"%(p,cat_num)
+                #       nb = "b%d_sel%s_CAT%d"%(p,selection,cat_num)
+                        brn_names.append(nb)
+                #       brn[nb] = RooRealVar(nb,nb,0.5,0,10.)
+                        [pmin,pmax] = Parameters[pdf_name][nb]
+                        brn[nb] = RooRealVar(nb,nb,pmin,pmax)
+                        coeff.add(brn[nb])
+                        gcs.append(brn[nb])
+                formula = "(1+%s*TMath::Sin(%s*%s+%s)+%s*TMath::Power(TMath::Sin(%s*%s+%s),2)+%s*TMath::Power(TMath::Sin(%s*%s+%s),3)+%s*TMath::Power(TMath::Sin(%s*%s+%s),4)+%s*TMath::Power(TMath::Sin(%s*%s+%s),5))"%(brn_names[0],x_name,brn_names[1],brn_names[2],brn_names[3],x_name,brn_names[1],brn_names[2],brn_names[4],x_name,brn_names[1],brn_names[2],brn_names[5],x_name,brn_names[1],brn_names[2],brn_names[6],x_name,brn_names[1],brn_names[2])
+                coeff.add(x)
+                name = "qcd_model_"+pdf_name+"_CAT%d"%cat_num
+        #       name = "qcd_model_POL1POL1_CAT%d"%cat_num
+                pdf = ROOT.RooGenericPdf(name,"",formula,coeff )
+
 	elif pdf_name=="sineErf":            
 		coeff.removeAll()
 		brn = {}
