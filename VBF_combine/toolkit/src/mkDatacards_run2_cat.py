@@ -137,12 +137,13 @@ def main():
 		sfname = os.path.split(fSIG.GetName())[1]
  ## files
 		if opts.bias : 
-			fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","data_obs","/mnt/t3nfs01/data01/shome/nchernya/VBFHbb2016/VBF_fit/bias/shapes/",fname,"w:data_hist_$CHANNEL"))
-			fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","qcd     ","/mnt/t3nfs01/data01/shome/nchernya/VBFHbb2016/VBF_fit/bias/shapes/",fname_bias,"w:qcd_model_%s_$CHANNEL"%(''.join(opts.TF))))
-			fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","top     ","/mnt/t3nfs01/data01/shome/nchernya/VBFHbb2016/VBF_fit/bias/shapes/",fname,"w:Top_model_$CHANNEL"))
-			fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","zjets   ","/mnt/t3nfs01/data01/shome/nchernya/VBFHbb2016/VBF_fit/bias/shapes/",fname,"w:Z_model_$CHANNEL"))
-			fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","qqH_hbb     ","/mnt/t3nfs01/data01/shome/nchernya/VBFHbb2016/VBF_fit/bias/shapes/",sfname,"w:signal_model_m%s_$CHANNEL"%jmass))
-			fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","ggH_hbb     ","/mnt/t3nfs01/data01/shome/nchernya/VBFHbb2016/VBF_fit/bias/shapes/",sfname,"w:signal_model_m%s_$CHANNEL"%jmass))
+			fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","data_obs","../root",fname,"w:data_hist_$CHANNEL"))
+                        fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","qcd     ","../root",fname_bias,"w:qcd_model_%s_$CHANNEL"%(''.join(opts.TF))))
+                        fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","top     ","../root",fname,"w:Top_model_$CHANNEL"))
+                        fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","zjets   ","../root",fname,"w:Z_model_$CHANNEL"))
+                        fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","qqH_hbb     ","../root",sfname,"w:signal_model_m%s_$CHANNEL"%jmass))
+                        fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","ggH_hbb     ","../root",sfname,"w:signal_model_m%s_$CHANNEL"%jmass))
+
 		if not opts.bias : 
 			fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","qcd     ","../root",fname,"w:qcd_model_%s_$CHANNEL"%(''.join(opts.TF))))
 			fout.write("%-15s %-15s *   %s/%-30s %-30s\n"%("shapes","data_obs","../root",fname,"w:data_hist_$CHANNEL"))
@@ -205,7 +206,8 @@ def main():
 		labels=[]
   	#	if not opts.bias : labels = ["BR_hbb","QCDscale_qqh","QCDscale_ggh","pdf_Higgs_qqbar","pdf_Higgs_gg","lumi_13TeV","QGL_vbfbb","CMS_scale_j_ACCEPT_13TeV","CMS_res_j_ACCEPT_13TeV","CMS_qqH_hbb_trigger_13TeV","UE_vbfbb_13TeV","PS_vbfbb_13TeV","CMS_qqH_hbb_QCDscale_13TeV","CMS_ggH_hbb_QCDscale_13TeV","CMS_qqH_hbb_pdf_13TeV","CMS_ggH_hbb_pdf_13TeV","CMS_vbfbb_pu_unc_13TeV","CMS_vbfbb_bTagJES_13TeV","CMS_vbfbb_bTagLF_13TeV","CMS_vbfbb_bTagHF_13TeV","CMS_vbfbb_bTagLFStats1_13TeV","CMS_vbfbb_bTagLFStats2_13TeV","CMS_vbfbb_bTagHFStats1_13TeV","CMS_vbfbb_bTagHFStats2_13TeV","CMS_vbfbb_bTagCErr1_13TeV","CMS_vbfbb_bTagCErr2_13TeV"]
   		if not opts.bias : labels = ["BR_hbb","QCDscale_qqH","QCDscale_ggH","pdf_Higgs_qqbar","pdf_Higgs_gg","lumi_13TeV_2016","QGL_vbfbb","CMS_scale_j_ACCEPT_13TeV","CMS_res_j_ACCEPT_13TeV","CMS_qqH_hbb_trigger_13TeV","UE","PS","QCDscale_qqH_ACCEPT","QCDscale_ggH_ACCEPT","pdf_qqH_ACCEPT","pdf_ggH_ACCEPT","CMS_vbfbb_pu_unc_13TeV","CMS_vbfbb_bTagJES_13TeV","CMS_vbfbb_bTagLF_13TeV","CMS_vbfbb_bTagHF_13TeV","CMS_vbfbb_bTagLFStats1_13TeV","CMS_vbfbb_bTagLFStats2_13TeV","CMS_vbfbb_bTagHFStats1_13TeV","CMS_vbfbb_bTagHFStats2_13TeV","CMS_vbfbb_bTagCErr1_13TeV","CMS_vbfbb_bTagCErr2_13TeV"]
-  		if opts.bias : labels = ["QCDscale_ggh","pdf_Higgs_qqbar","pdf_Higgs_gg","lumi_13TeV","CMS_scale_j_ACCEPT_13TeV","CMS_qqH_hbb_trigger_13TeV","UE_vbfbb_13TeV","PS_vbfbb_13TeV","CMS_qqH_hbb_QCDscale_13TeV","CMS_ggH_hbb_QCDscale_13TeV","CMS_vbfbb_bTagLF_13TeV"]
+  	#	if opts.bias : labels = ["QCDscale_ggh","pdf_Higgs_qqbar","pdf_Higgs_gg","lumi_13TeV","CMS_scale_j_ACCEPT_13TeV","CMS_qqH_hbb_trigger_13TeV","UE_vbfbb_13TeV","PS_vbfbb_13TeV","CMS_qqH_hbb_QCDscale_13TeV","CMS_ggH_hbb_QCDscale_13TeV","CMS_vbfbb_bTagLF_13TeV"]
+		if opts.bias : labels = ["QCDscale_ggH","pdf_Higgs_qqbar","pdf_Higgs_gg","lumi_13TeV_2016","CMS_scale_j_ACCEPT_13TeV","CMS_qqH_hbb_trigger_13TeV","UE","PS","QCDscale_qqH_ACCEPT","QCDscale_ggH_ACCEPT","CMS_vbfbb_bTagLF_13TeV"]
 		for l in labels:
 			fout.write("%-25s %-8s"%(l,"lnN"))
 			for i in CATS: 
