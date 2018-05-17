@@ -122,7 +122,7 @@ def RooDraw(opts,can,C,S,x,rh,model,qPDF,zPDF,tPDF,archive,chi2_val,n_param,titl
 	frametop.GetYaxis().SetLabelSize(0.035)
 	frametop.GetYaxis().SetTitleSize(0.055)
 	frametop.GetYaxis().SetTitleOffset(1.5);
-	frametop.GetYaxis().SetTitle("Events / %.1f GeV"%(opts.dX[0]))
+	frametop.GetYaxis().SetTitle("Events / %.1f GeV"%(opts.dX[0]*10))
 	frametop.Draw()
 	gPad.Update()
 	
@@ -131,6 +131,7 @@ def RooDraw(opts,can,C,S,x,rh,model,qPDF,zPDF,tPDF,archive,chi2_val,n_param,titl
 	prob = ROOT.TMath.Prob(chi2_val,ndf)
 	print ndf
 	print chi2_val
+	print chi2
 	print prob
 	print "this is  what I want...."	
 	
@@ -221,8 +222,6 @@ def main():
 	h   = {}
 	hb  = {}
 	Y   = {}
-        fout = ROOT.TFile('h_fun.root', 'RECREATE')
-	fout.cd()	
 ## CMS info
 	left,right,top,bottom = gStyle.GetPadLeftMargin(),gStyle.GetPadRightMargin(),gStyle.GetPadTopMargin(),gStyle.GetPadBottomMargin()
 	pCMS1 = TPaveText(left,1.-top,0.4,1.,"NDC")
@@ -397,7 +396,7 @@ def main():
                         print "h_data_integral=%.3f"%(h_data.Integral())
 			h_func = model[N].createHistogram('h_func',x)
                         print "h_func_integral=%.3f"%(h_func.Integral())
-			h_func.Scale(total_fitted_yield/h_func.Integral())
+			#h_func.Scale(total_fitted_yield/h_func.Integral())
 			h_func.SetLineColor(kRed)
                         h_func.SetLineWidth(3)
 			print "h_func integral after scaling=%.2f"%(h_func.Integral())
@@ -405,6 +404,7 @@ def main():
 			print 'KS probability = ',ks
 
   ### Draw
+			rh[N]  = RooDataHist("data_hist_CAT%d"%Cp,"data_hist_CAT%d"%Cp,RooArgList(x),h[N].Rebin(10))			
   			RooDraw(opts,can,C,S,x,rh[N],model[N],qcd_pdf[N],zPDF[N],tPDF[N],archive,chi2_val,n_param,opts.function,ks)
 		#	can.cd(C+1)
 			can.cd(0)
@@ -426,7 +426,7 @@ def main():
 			for o in [rh[N],rhb[N],model[N],Y[N]]:
 				getattr(w,'import')(o,RooFit.RenameConflictNodes("(1)"))
 				if opts.verbosity>0 and not opts.quiet: o.Print()
-			h_func.Draw("same")
+			#h_func.Draw("same")
                         """makeDirs("%s/plot/biasFunctionsCATS/"%opts.workdir)
          		if N=='CAT0' or N=='CAT4':
                           can.SaveAs("%s/plot/biasFunctionsCATS/%s_%s_%s.pdf"%(opts.workdir,can.GetName(),opts.function,N))
