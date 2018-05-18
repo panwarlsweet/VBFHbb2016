@@ -259,9 +259,9 @@ def main():
 		can = TCanvas("canD_sel%s"%S.tag,"%s"%opts.function,600,600)
 #		can.Divide(2,2)
 ## Category loop
-#		for C in range(S.ncat):
-		if (1>0):
-			C=0
+		for C in range(S.ncat):
+#		if (1>0):
+#			C=0
 			Cp = C + sum([x for x in SC.ncats[0:iS]])
 ####################################################################################################
 #### Start of RooFit part 
