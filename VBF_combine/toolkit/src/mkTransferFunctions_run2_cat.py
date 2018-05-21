@@ -171,7 +171,7 @@ def main():
 		line.GetYaxis().SetTitle("Signal / Control")
 		line.GetYaxis().SetTitleOffset(1.35)
 ## Load trees
-		fin = TFile.Open("/afs/cern.ch/work/n/nchernya/VBFHbb_2016/VBF_combine/inputs/root/FitVBF_BTagCSV_analysis_%s_trignone_v25_VBF_newReg.root"%(str.lower(S.tag)),"read")
+		fin = TFile.Open("/afs/cern.ch/work/l/lata/VBF_Analysis/CMSSW_7_4_7/src/VBFHbb2016/VBF_combine/VBFHbb2016/inputs/FitVBF_BTagCSV_analysis_%s_trignone_v25_VBF_newReg.root"%(str.lower(S.tag)),"read")
 		T = fin.Get("VBF/events")
 ## Make canvas
 		CN = TCanvas("c_sel%s"%S.tag,"c_sel%s"%S.tag,900*(S.ncat-1),900)
@@ -208,7 +208,8 @@ def main():
 			cut = "bdt_VBF>%1.4f && bdt_VBF<=%1.4f"%(S.boundaries[C],S.boundaries[C+1])
 			T.Draw("mbbRegFSR>>hDat_%s"%(N),cut)
 ### Blind
-			for iBin in range(1,h.GetNbinsX()+1):
+			if Cp==2 or Cp==3 or Cp==6 or Cp==7 or Cp==8:
+			    for iBin in range(1,h.GetNbinsX()+1):
 				if h.GetBinLowEdge(iBin) >= 100 and h.GetBinLowEdge(iBin) < 150:
 					h.SetBinContent(iBin,0)
 					h.SetBinError(iBin,0)
@@ -224,6 +225,7 @@ def main():
 ### Get fit function			
 			fRat["fRat_"+N] = TF1("fRat_"+N,TFinfo[TF[iS]]['tf1'],opts.X[0],opts.X[1])
 			f = fRat["fRat_"+N]
+  			#f.SetParameters(1.68921783628, -0.0143822652884, 9.32982378219e-05,-1.89273107532e-07)
 			f.SetLineColor([kBlack,kBlue,kRed,kGreen+2,kOrange][C])
 
 #### CAT 0 or 4 (control CATs)
