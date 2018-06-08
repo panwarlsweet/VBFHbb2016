@@ -209,7 +209,7 @@ def main():
 			T.Draw("mbbRegFSR>>hDat_%s"%(N),cut)
 ### Blind
 			if Cp==2 or Cp==3 or Cp==6 or Cp==7 or Cp==8:
-			    for iBin in range(1,h.GetNbinsX()+1):
+      	                  for iBin in range(1,h.GetNbinsX()+1):
 				if h.GetBinLowEdge(iBin) >= 100 and h.GetBinLowEdge(iBin) < 150:
 					h.SetBinContent(iBin,0)
 					h.SetBinError(iBin,0)
@@ -225,6 +225,10 @@ def main():
 ### Get fit function			
 			fRat["fRat_"+N] = TF1("fRat_"+N,TFinfo[TF[iS]]['tf1'],opts.X[0],opts.X[1])
 			f = fRat["fRat_"+N]
+			if iS == 0:  #### select only DB selection
+	                        f.SetParLimits(0,1,2)
+        	                f.SetParLimits(1,0,1)
+                	        f.SetParLimits(2,0,1)
   			#f.SetParameters(1.68921783628, -0.0143822652884, 9.32982378219e-05,-1.89273107532e-07)
 			f.SetLineColor([kBlack,kBlue,kRed,kGreen+2,kOrange][C])
 
