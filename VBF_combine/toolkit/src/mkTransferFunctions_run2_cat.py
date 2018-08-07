@@ -208,8 +208,8 @@ def main():
 			cut = "bdt_VBF>%1.4f && bdt_VBF<=%1.4f"%(S.boundaries[C],S.boundaries[C+1])
 			T.Draw("mbbRegFSR>>hDat_%s"%(N),cut)
 ### Blind
-#			if Cp==2 or Cp==3 or Cp==6 or Cp==7 or Cp==8:
-       	                for iBin in range(1,h.GetNbinsX()+1):
+			if Cp==2 or Cp==3 or Cp==6 or Cp==7 or Cp==8:
+       	                   for iBin in range(1,h.GetNbinsX()+1):
 				if h.GetBinLowEdge(iBin) >= 100 and h.GetBinLowEdge(iBin) < 150:
 					h.SetBinContent(iBin,0)
 					h.SetBinError(iBin,0)
@@ -226,9 +226,12 @@ def main():
 			fRat["fRat_"+N] = TF1("fRat_"+N,TFinfo[TF[iS]]['tf1'],opts.X[0],opts.X[1])
 			f = fRat["fRat_"+N]
 			if iS == 0:  #### select only DB selection
-	                       f.SetParLimits(0,1,2)
-        	               f.SetParLimits(1,-0.01,0.0)
-                	       f.SetParLimits(2,0,1e-05)
+	                       f.SetParLimits(0,1.25,5)
+        	               f.SetParLimits(1,-0.2,0)
+                	       f.SetParLimits(2,1e-05,10e-05)
+			if iS == 1:  #### select only SB selection
+                               f.SetParLimits(0,1,3)
+                               f.SetParLimits(1,-0.008,0)
                             #f.SetParameters(1.25132534333, -0.00404323237831, 1.52065749766e-05) 
   			#f.SetParameters(1.68921783628, -0.0143822652884, 9.32982378219e-05,-1.89273107532e-07)
 			f.SetLineColor([kBlack,kBlue,kRed,kGreen+2,kOrange][C])
@@ -240,6 +243,7 @@ def main():
 				print f.GetChisquare(), f.GetNDF()
 				chi2=f.GetChisquare()
 				ndf=f.GetNDF()
+				chi2_v=chi2/ndf
 				fitters["fitter_"+N] = TVirtualFitter.GetFitter()
 				ff = fitters["fitter_"+N]
 				covs["cov_"+N] = TMatrixDSym(ff.GetNumberTotalParameters(),ff.GetCovarianceMatrix())
@@ -281,7 +285,7 @@ def main():
 				g.Draw("sameE3")
 				r.Draw("same")
 				L1 = TLegend(gStyle.GetPadLeftMargin()+gStyle.GetPadTopMargin()*0.3333,gStyle.GetPadBottomMargin()+gStyle.GetPadTopMargin()*0.3333,0.82,0.4)
-				L1.SetHeader("%s selection CAT%d/CAT%d"%(S.label,Cp,sum(SC.ncats[0:iS])))
+				L1.SetHeader("%s selection CAT%d/CAT%d, chi2=%.3f, prob=%.2f"%(S.label,Cp,sum(SC.ncats[0:iS]),chi2_v,prob))
 		#		L1.SetHeader("CAT%d/CAT%d"%(Cp,sum(SC.ncats[0:iS])))
 				L1.SetFillColor(-1)
 				L1.SetBorderSize(0)

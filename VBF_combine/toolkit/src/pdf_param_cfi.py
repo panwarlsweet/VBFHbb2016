@@ -1,7 +1,9 @@
+##### if you want to generate toy, the label of alternative function should not have "Pol" word, otherwise it will generate pdf according to QCD POL model and you will get pdf error in toy generation. So you have to change "Pol" words for all the alternative function in generatePdf and pdf_param_cfi file also add the formula in generateFormula file#####
+
 Nparam = {
 ########  exp
 'expPol1' : 1,
-'expPol2':2,
+'exp_pol2':2,
 'expPol3':3,
 'expPol4':4,
 'expPol5':5,
@@ -12,7 +14,7 @@ Nparam = {
 ####### Poldijet
 'Pol1_dijet' : 3,
 'Pol2_dijet' : 4,
-'Pol3_dijet' : 5,
+'pol3_dijet' : 5,
 'Pol4_dijet' : 6,
 'Pol5_dijet' : 7,
 'Pol6_dijet' : 8,
@@ -21,7 +23,7 @@ Nparam = {
 
 ####### Polinvdijet
 'Pol1_invdijet':3,
-'Pol2_invdijet':4,
+'pol2_invdijet':4,
 'Pol3_invdijet':5,
 'Pol4_invdijet':6,
 'Pol5_invdijet':7,
@@ -35,7 +37,7 @@ Nparam = {
 #######  x^Pol
 'x^Pol1' : 2,
 'x^Pol2' : 3,
-'x^Pol3' : 4,
+'x^pol3' : 4,
 'x^Pol4' : 5,
 'x^Pol5' : 6,
 
@@ -108,7 +110,7 @@ Parameters = {
         'b0_selsingle_CAT4' : [0,1],
 },
 
-'expPol2' : {
+'exp_pol2' : {
 	'b0_seldouble_CAT0' : [-5,5],
 	'b1_seldouble_CAT0' : [-5,5],
         'b0_selsingle_CAT4' : [-5,5],
@@ -119,9 +121,9 @@ Parameters = {
 	'b0_CAT0' : [-5,5],
         'b1_CAT0' : [-5,5],
 	'b2_CAT0' : [-5,5],
-        'b0_CAT4' : [-5,5],
-        'b1_CAT4' : [-5,5],
-	'b2_CAT4' : [-5,5]
+        'b0_CAT4' : [-0.05,0.05],
+        'b1_CAT4' : [-0.0005,0.0005],
+	'b2_CAT4' : [-1e-05,1e-05]
 },
 
 'expPol4' : {
@@ -129,10 +131,10 @@ Parameters = {
         'b1_seldouble_CAT0' : [-5,5],
         'b2_seldouble_CAT0' : [-5,5],
 	'b3_seldouble_CAT0' : [-5,5],
-        'b0_selsingle_CAT4' : [-5,5],
-        'b1_selsingle_CAT4' : [-5,5],
-        'b2_selsingle_CAT4' : [-5,5],
-	'b3_selsingle_CAT4' : [-5,5]
+        'b0_selsingle_CAT4' : [-0.05,0.05],
+        'b1_selsingle_CAT4' : [-0.0005,0.0005],
+        'b2_selsingle_CAT4' : [-1e-05,1e-05],
+	'b3_selsingle_CAT4' : [-1e-7,1e-7]
 },
 
 'expPol5' : {
@@ -141,11 +143,11 @@ Parameters = {
         'b2_CAT0' : [-9.3537e-7,1e-5],
         'b3_CAT0' : [1.7654e-9,1e-7],
 	'b4_CAT0' : [0,1e-09],
-        'b0_CAT4' : [0.0229348,5],
-        'b1_CAT4' : [-0.000275669,1e-03],
-        'b2_CAT4' : [1.72816e-06,1e-05],
+        'b0_CAT4' : [-0.05,.05],
+        'b1_CAT4' : [-0.001,1e-03],
+        'b2_CAT4' : [-1e-05,1e-05],
         'b3_CAT4' : [-3.46931e-09,1e-08],
-	'b4_CAT4' : [0.0,1e-10],
+	'b4_CAT4' : [-1e-10,1e-10],
 },
 
 'expPol6' : {
@@ -235,11 +237,11 @@ Parameters = {
 
 },
 
-'x^Pol3' : {
-	'b0_seldouble_CAT0' : [-5,5],
-        'b1_seldouble_CAT0' : [-5,5],
-        'b2_seldouble_CAT0' : [-5,5],
-	'b3_seldouble_CAT0' : [-5,5],
+'x^pol3' : {
+	'b0_seldouble_CAT0' : [1,2],
+        'b1_seldouble_CAT0' : [-2,0],
+        'b2_seldouble_CAT0' : [-1e-04,1e-04],
+	'b3_seldouble_CAT0' : [-1e-07,1e-07],
         'b0_selsingle_CAT4' : [-5,5],
         'b1_selsingle_CAT4' : [-5,5],
         'b2_selsingle_CAT4' : [-5,5],
@@ -313,17 +315,18 @@ Parameters = {
 	'b3_CAT4' : [-10,10],
 },
 
-'Pol3_dijet' : {
-        'b0_seldouble_CAT0' : [5.15637,10],
-        'b1_seldouble_CAT0' : [-0.739986, 0],
-        'b2_seldouble_CAT0' : [0.00582,10],
-        'b3_seldouble_CAT0' : [5.890e-05,10],
-        'b4_seldouble_CAT0' : [-10,10],
+'pol3_dijet' : {
+        'b0_seldouble_CAT0' : [-1,2],
+        'b1_seldouble_CAT0' : [-1,1],
+        'b2_seldouble_CAT0' : [-1, 1],
+        'b3_seldouble_CAT0' : [-1e-03, 1e-03],
+        'b4_seldouble_CAT0' : [-1e-05,1e-05],
 	'b0_selsingle_CAT4' : [-10,10],
         'b1_selsingle_CAT4' : [-1,10],
         'b2_selsingle_CAT4' : [-0.0027,4],
         'b3_selsingle_CAT4' : [-1e-03,10],
 	'b4_selsingle_CAT4' : [-10,10],
+
 },
 'Pol4_dijet' : {
         'b0_CAT0' : [5.15641,10],
@@ -428,7 +431,7 @@ Parameters = {
         'b2_CAT4' : [-100,100],
 },
 
-'Pol2_invdijet' : {
+'pol2_invdijet' : {
         'b0_seldouble_CAT0' : [4.6037,10],
         'b1_seldouble_CAT0' : [-10,10],
         'b2_seldouble_CAT0' : [-100,100],
