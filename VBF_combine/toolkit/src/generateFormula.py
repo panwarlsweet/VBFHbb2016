@@ -19,7 +19,7 @@ def generate_formula(pdf_name="POL8",x_name='mbbReg_CAT0',selection="double"):
 	elif pdf_name=="modG":            
 		formula = "TMath::Exp(-1.*%s*%s)*TMath::Erfc(%s-%s*%s)"%(x_name,brn_names[0],brn_names[1],brn_names[2],x_name)
         elif pdf_name=="modG4":
-		formula = "TMath::Exp(-1.*%s*%s-%s*TMath::Power(%s,2)-%s*TMath::Power(%s,3)-%s*TMath::Power(%s,4))*TMath::Erfc(%s-%s*%s)"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[2],x_name,brn_names[3],x_name,brn_names[4],brn_names[5],x_name)
+		formula = "TMath::Exp(-1.*%s*%s-%s*TMath::Power(%s,2)-%s*TMath::Power(%s,3)-%s*TMath::Power(%s,4))*TMath::Erfc(%s-%s*%s)"%(x_name,brn_names[0],brn_names[1],x_name,brn_names[3],x_name,brn_names[4],x_name,brn_names[5],brn_names[2],x_name)
 	elif pdf_name=="tanhPol2":            
 		formula = "TMath::TanH(%s*(%s-%s))*(%s*TMath::Power(%s,2)+%s*%s+1.)"%(brn_names[0],x_name,brn_names[1],brn_names[2],x_name,brn_names[3],x_name)
 	elif pdf_name=="tanh":            

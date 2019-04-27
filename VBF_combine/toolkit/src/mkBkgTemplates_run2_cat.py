@@ -158,13 +158,13 @@ def main():
 		for f in fnames['files'].itervalues():
 			if '%s'%S.tag in f['fname']:
 				print S.tag 
-				inf[fi] = TFile.Open("/afs/cern.ch/work/n/nchernya/VBFHbb_2016/VBF_combine/inputs/root/"+f['fname'],'read')
+				inf[fi] = TFile.Open("/afs/cern.ch/work/l/lata/VBF_Analysis/CMSSW_7_4_7/src/VBFHbb2016/VBF_combine/VBFHbb2016/inputs/"+f['fname'],'read')
 				fi += 1
  ## Canvas definition
 		canZ = TCanvas("canZ_sel%s"%S.tag,"canZ_sel%s"%S.label,900,600)
 		canT = TCanvas("canT_sel%s"%S.tag,"canT_sel%s"%S.label,900,600)
-		canZ.Divide(2,2)
-		canT.Divide(2,2)
+		canZ.Divide(3,2)
+		canT.Divide(3,2)
 		can = TCanvas("c","c",900,600)
  ## Nuissance parameters
 		print S.tag
