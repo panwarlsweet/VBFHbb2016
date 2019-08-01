@@ -262,7 +262,7 @@ def main():
 		for C in range(S.ncat):
 #        	if (1>0):
 #		        C=0
-                   if iS==0:
+                   if iS==0 or iS==1:
           	        Cp = C + sum([x for x in SC.ncats[0:iS]])
 ####################################################################################################
 #### Start of RooFit part 
@@ -340,18 +340,20 @@ def main():
 				if Cp==4 :  gcs_aux[:]=[]
 				[qcd_pdf[N],params[N]] = generate_pdf(x, pdf_name=opts.function,x_name=x_name,selection=S.tag,gcs=gcs_aux) 
 				if qcd_pdf[N] == None : return -1
-			else:
+				
+                        else :
 			#	for ib in range(opts.BRN[iS]+1):
 			#		nb = "b%d_CAT%d"%(ib,sum(SC.ncats[0:iS]))
 			#		brn[nb].setConstant(kTRUE)
 			#	qcd_pdf_aux[N]  = RooBernstein("qcd_model_aux_%s_CAT%d"%(''.join(opts.TF),Cp),"qcd_model_aux_%s_CAT%d"%(''.join(opts.TF),Cp),x,brn_params["CAT%d"%(sum(SC.ncats[0:iS]))])
+				
 				formula = ''
 				params_aux = RooArgList()
 				for ib in range(n_param): 
+					#gcs_aux[ib].setConstant(kTRUE)
+					#gcs_aux[ib].Print()
 					gcs_aux[ib].setConstant(kTRUE)
 					gcs_aux[ib].Print()
-				#	gcs_aux[ib].setConstant(kTRUE)
-				#	gcs_aux[ib].Print()
 					params_aux.add(gcs_aux[ib])
 				if (opts.function.find('Pol')==-1) : 
 					params_aux.add(x)
